@@ -19,7 +19,7 @@ const data = {
     "Nach Objekt / Ort": "SCHM. ALLENSBACH / MRT",
     "Statistik": "",
     "Zusatzfeld": "",
-    "Tarif": "9111",
+    "Tarif": "",
     "Zusatztext für Rechnung": ""
   },
   "PRIVAT": {
@@ -74,7 +74,7 @@ const data = {
     "Nach Objekt / Ort": "4202 / 4203 / 4205 / 4206",
     "Statistik": "91",
     "Zusatzfeld": "7",
-    "Tarif": "<>",
+    "Tarif": "Kein",
     "Zusatztext für Rechnung": ""
   },
   "FEHLFAHRT": {
@@ -85,7 +85,7 @@ const data = {
     "Nach Objekt / Ort": "",
     "Statistik": "81",
     "Zusatzfeld": "6",
-    "Tarif": "<>",
+    "Tarif": "Kein",
     "Zusatztext für Rechnung": ""
   },
   "KH - KONSTANZ": {
