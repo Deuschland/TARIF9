@@ -54,6 +54,11 @@ body {
   background-color: #ff9800;
 }
 
+.icon-button.sub-selected {
+  background-color: #f48fb1; /* рожевий */
+  color: white;
+}
+
 .vertical-table {
   font-size: 1.1em; /* збільшено */
   margin: 0 auto 30px auto;

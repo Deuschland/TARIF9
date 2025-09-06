@@ -112,6 +112,7 @@ const data = {
   }
 };
 
+
 const resetBtn = document.getElementById("reset-button");
 const topContainer = document.getElementById("top-button");
 const subOptions = document.getElementById("sub-options");
@@ -137,12 +138,14 @@ function renderView(category) {
       { label: "5 - Rollstuhl", tarif: "9711" }
     ];
 
+    subOptions.innerHTML = "";
+
     options.forEach(opt => {
       const btn = document.createElement("button");
       btn.className = "icon-button";
       btn.textContent = opt.label;
       btn.addEventListener("click", () => {
-        renderSchmiederTable(opt.label, opt.tarif);
+        renderSubSelection(opt.label, opt.tarif);
       });
       subOptions.appendChild(btn);
     });
@@ -155,14 +158,17 @@ function renderView(category) {
   }
 }
 
-function renderSchmiederTable(subLabel, tarifValue) {
+function renderSubSelection(label, tarifValue) {
+  // Очистити підкатегорії
   subOptions.innerHTML = "";
 
-  const subBtn = document.createElement("button");
-  subBtn.className = "icon-button selected";
-  subBtn.textContent = subLabel;
-  subOptions.appendChild(subBtn);
+  // Створити рожеву кнопку вибраного варіанту
+  const selectedBtn = document.createElement("button");
+  selectedBtn.className = "icon-button sub-selected";
+  selectedBtn.textContent = label;
+  subOptions.appendChild(selectedBtn);
 
+  // Створити таблицю з відповідним тарифом
   const entry = {
     "Name": "",
     "Kostenträger-Nr.": "3491",
@@ -185,13 +191,19 @@ function renderTable(entry) {
     "Zusatzfeld", "Tarif", "Zusatztext für Rechnung"
   ];
 
-  const rows = fields.map(field => {
-    const value = entry[field] && entry[field].trim() !== "" ? entry[field] : "—";
+  let rows = fields.map(field => {
+    const value = entry[field] !== undefined ? entry[field] : "";
     const extraClass = (field === "Kostenträger-Nr." || field === "Tarif") ? "highlight" : "";
     return `<div class="row"><div class="label">${field}</div><div class="value ${extraClass}">${value}</div></div>`;
-  }).join("");
+  });
 
-  output.innerHTML = `<div class="vertical-table">${rows}</div>`;
+  // Видалити останній порожній рядок, якщо він після Zusatztext für Rechnung
+  const lastRow = rows[rows.length - 1];
+  if (lastRow.includes("Zusatztext für Rechnung") && lastRow.includes("> </div></div>")) {
+    rows.pop();
+  }
+
+  output.innerHTML = `<div class="vertical-table">${rows.join("")}</div>`;
 }
 
 function resetView() {
